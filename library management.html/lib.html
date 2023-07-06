@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Bookstore</title>
+  <style>
+
+    
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      margin: 0;
+      padding: 20px;
+    }
+    
+    h1 {
+      text-align: center;
+    }
+    
+    #filterSection {
+      margin-bottom: 20px;
+    }
+    
+    #searchInput {
+      width: 300px;
+      padding: 5px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+    }
+    
+    #sortSelect {
+      padding: 5px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+      margin-left: 10px;
+    }
+    
+    #bookList {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    
+    .bookItem {
+      background-color: #fff;
+      border-radius: 5px;
+      padding: 10px;
+      margin: 10px;
+      box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      width: 200px;
+    }
+    
+    .bookItem img {
+      width: 150px;
+      height: 200px;
+      object-fit: cover;
+      margin-bottom: 10px;
+      border-radius: 5px;
+    }
+    
+    .bookItem h3 {
+      font-size: 18px;
+      margin-bottom: 5px;
+    }
+    
+    .bookItem p {
+      font-size: 14px;
+      margin-bottom: 5px;
+    }
+    
+    #cart {
+      margin-top: 20px;
+      background-color: #fff;
+      border-radius: 5px;
+      padding: 10px;
+      box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    #cart h2 {
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+    
+    #cartItems {
+      list-style: none;
+      padding: 0;
+    }
+    
+    #cartItems li {
+      margin-bottom: 5px;
+    }
+    
+    #checkoutBtn {
+      background-color: #4caf50;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      font-weight: bold;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+  </style>
+  <script>
+    // Book data (replace with your actual book data or retrieve from an API)
+    const books = [
+      { title: "The Eye of the World", author: "Robert Jordan", genre: "Fiction", publishDate: "15 Jan 1990", count: 5, image: "https://i.imgur.com/sHzTEHB.jpeg"},
+      { title: "Bizarre Love Triangle", author: "Gillian Gilbert ", genre: "Mystery",  publishDate: "5 Nov 1986", count: 3, image: "https://i.imgur.com/ZHUe3BE.jpeg" },
+      { title: "Gums Germs and Steel", author: "WWW.Nortan and Company", genre: "Non-fiction", publishDate: "Mar 1 1997", count: 2, image: "https://i.imgur.com/eW0vVNP.jpeg" },
+      { title: "Everytime you go away", author: "Daryl Hall", genre: "Horror", publishDate: "Aug 4 2020", count: 5, image: "https://i.imgur.com/Exi3c9P.jpeg" },
+{ title: "Thinking fast and slow", author: "Daniel Kahneman", genre: "Fiction", publishDate: "1 Jan 2021 ", count: 10, image: "https://i.imgur.com/HJ6LyxS.jpeg" },
+{ title: "The God Delusion", author: "Richard Dawkins", genre: "Fiction", publishDate: "July 5 2020", count: 9, image: "https://i.imgur.com/60Svq70.jpeg" },
+{ title: "Escape from camp 14", author: "Blaine Harder", genre: "Thriller", publishDate: "June 10 1999", count: 18, image: "https://i.imgur.com/QuVX2Fz.jpeg" },
+{ title: "Game of thrones", author: "George R.R.Martin", genre: "Fantasy", publishDate: "Aug 1 1996", count: 20, image: "https://i.imgur.com/AEZtmxqb.jpg" },
+{ title: "Stephen Kings", author: "Edward King", genre: "Fiction", publishDate: "Sep 20 2021", count: 30, image: "https://i.imgur.com/kaTdcyg.jpeg" },
+{ title: "The Wisdom of Crowds", author: "James Surwiecki", genre: "Non Fiction", publishDate: "Nov 3 2018", count: 65, image: "https://i.imgur.com/TuI7VcK.jpeg" },
+{ title: "Stranger in a strange land", author: "Micheal Smith", genre: "Fiction", publishDate: "Dec 18 2020", count: 25, image: "https://i.imgur.com/NwFmtuC.jpeg" },
+{ title: "Ring World", author: "Sean Lam", genre: "Fiction", publishDate: "Dec 20 2019", count: 15, image: "https://i.imgur.com/q79ZEvZ.jpeg" },
+{ title: "Hitchikers Guide to Galaxy", author: "Douglas Adams", genre: "Thriller", publishDate: "Aug 4 2020", count: 5, image: "https://i.imgur.com/AX8hjjH.jpeg" },
+{ title: "Harry Potter", author: "J.K.Rowlin", genre: "Fiction", publishDate: "Mar 7 2021", count: 35, image: "https://i.imgur.com/CUOaIR9.jpeg" },
+{ title: "The case of the Missing servent", author: "Tarquik Hall", genre: "Comic", publishDate: "Apr 2021", count: 5, image: "https://i.imgur.com/rDQVEIi.jpeg" },
+{ title: "Pokeman", author: "Hidenori Kusaka", genre: "comic", publishDate: "May 1 2023", count: 9, image: "https://i.imgur.com/9eBvYFm.jpeg" },
+{ title: "Empire of Silence", author: "Christopher Ruochhio", genre: "Fantasy", publishDate: "Sep 5 1998", count: 4, image: "https://i.imgur.com/FkCBarf.jpeg" },
+{ title: "Thrones of Glass", author: "Sarah J.MAAS", genre: "Fantasy", publishDate: "Aug 4 2007", count: 5, image: "https://i.imgur.com/pcaoSJk.jpeg" },
+
+      // Add more books here...
+    ];
+
+
+
+    // Function to display books
+    function displayBooks(booksData) {
+      const bookList = document.getElementById("bookList");
+      bookList.innerHTML = "";
+
+      booksData.forEach(book => {
+        const bookItem = document.createElement("div");
+        bookItem.classList.add("bookItem");
+        bookItem.innerHTML = `
+          <img src="${book.image}" alt="${book.title}">
+          <h3>${book.title}</h3>
+          <p>Author: ${book.author}</p>
+          <p>Genre: ${book.genre}</p>
+          <p>Publish Date: ${book.publishDate}</p>
+          <p>Count: ${book.count}</p>
+          <button onclick="addToCart('${book.title}')">Add to Cart</button>
+        `;
+        bookList.appendChild(bookItem);
+      });
+    }
+
+   
+
+
+    
+
+    // Function to display cart items
+    function displayCartItems(cartItems) {
+      const cartItemList = document.getElementById("cartItems");
+      cartItemList.innerHTML = "";
+
+      cartItems.forEach(cartItem => {
+        const cartItemElement = document.createElement("li");
+        cartItemElement.textContent = cartItem;
+        cartItemList.appendChild(cartItemElement);
+      });
+    }
+
+    // Function to perform search and filter
+    function performSearchAndFilter() {
+      const searchInput = document.getElementById("searchInput").value.toLowerCase();
+      const sortSelect = document.getElementById("sortSelect").value;
+
+      let filteredBooks = books.filter(book => {
+        return (
+          book.title.toLowerCase().includes(searchInput) ||
+          book.author.toLowerCase().includes(searchInput) ||
+          book.genre.toLowerCase().includes(searchInput) ||
+          book.year.toString().includes(searchInput) ||
+          book.subject.toLowerCase().includes(searchInput) ||
+          book.publishDate.toLowerCase().includes(searchInput)
+        );
+      });
+
+      if (sortSelect === "title") {
+        filteredBooks.sort((a, b) => a.title.localeCompare(b.title));
+      } else if (sortSelect === "author") {
+        filteredBooks.sort((a, b) => a.author.localeCompare(b.author));
+      } else if (sortSelect === "genre") {
+        filteredBooks.sort((a, b) => a.genre.localeCompare(b.genre));
+      } else if (sortSelect === "year") {
+        filteredBooks.sort((a, b) => a.year - b.year);
+      } else if (sortSelect === "subject") {
+        filteredBooks.sort((a, b) => a.subject.localeCompare(b.subject));
+      } else if (sortSelect === "publishDate") {
+        filteredBooks.sort((a, b) => a.publishDate.localeCompare(b.publishDate));
+      }
+
+      displayBooks(filteredBooks);
+    }
+
+    // Initialize the page
+    function initializePage() {
+      displayBooks(books);
+    }
+
+    // Call the initializePage function when the page loads
+    window.onload = initializePage;
+  </script>
+</head>
+<body>
+ <h1> Bookstore</h1>
+  <i class="fa fa-book" style="font-size:36px"></i>
+  <div id="filterSection">
+    <input type="text" id="searchInput" placeholder="Search...">
+    <select id="sortSelect" onchange="performSearchAndFilter()">
+      <option value="">Sort By</option>
+      <option value="title">Title</option>
+      <option value="author">Author</option>
+      <option value="genre">Genre</option>
+      <option value="year">Year</option>
+      <option value="subject">Subject</option>
+      <option value="publishDate">Publish Date</option>
+    </select>
+  </div>
+  <div id="bookList"></div>
+ <div id="cart">
+    <h2>Cart</h2>
+    <ul id="cartItems"></ul>
+    <button id="checkoutBtn">Checkout</button>
+<script>
+    // Retrieve the checkout button element
+    const checkoutBtn = document.getElementById("checkoutBtn");
+
+    // Add event listener to the checkout button
+    checkoutBtn.addEventListener("click", function() {
+      // Redirect to cart.html
+      window.location.href = "cart.html";
+    });
+  </script>
+<marquee><b>CHEK OUT THE CART!!!!!</b></marquee>
+  </div>
+<a href="login page.html">Back to login</a><br><br>
+
+
+</body>
+</html>

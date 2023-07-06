@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Cart</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      margin: 0;
+      padding: 20px;
+    }
+    
+    h1 {
+      text-align: center;
+    }
+    
+    #cartItems {
+      margin-bottom: 20px;
+    }
+    
+    .cartItem {
+      background-color: #fff;
+      border-radius: 5px;
+      padding: 10px;
+      margin-bottom: 10px;
+      box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+    
+    .cartItem img {
+      width: 150px;
+      height: 200px;
+      object-fit: cover;
+      margin-bottom: 10px;
+      border-radius: 5px;
+    }
+    
+    .cartItem h3 {
+      font-size: 18px;
+      margin-bottom: 5px;
+    }
+    
+    .cartItem p {
+      font-size: 14px;
+      margin-bottom: 5px;
+    }
+    
+
+ #paymentContainer {
+      text-align: center;
+      margin-top: 50px;
+    }
+
+    #barcodeImage {
+      width: 300px;
+      height: auto;
+      margin-bottom: 20px;
+    }
+
+    #paymentTags {
+      display: flex;
+      justify-content: center;
+    }
+
+    .paymentTag {
+      background-color: #fff;
+      border-radius: 5px;
+      padding: 10px;
+      margin: 0 10px;
+      box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+    #totalPrice {
+      text-align: center;
+      font-size: 20px;
+      font-weight: bold;
+    }
+    
+    #checkoutBtn {
+      display: block;
+      margin: 0 auto;
+      background-color: #4caf50;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      font-weight: bold;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+.icon img {
+  width: 50px; /* Adjust the width as needed */
+  height: 80px; /* Maintain aspect ratio */
+  margin-left: 10px; /* Adjust the spacing between the image and details */
+}
+
+.details {
+  text-align: center; /* Center the details */
+}
+  </style>
+</head>
+<body>
+  <h1>Cart</h1>
+
+  <div id="cartItems">
+    <!-- Cart items will be dynamically added here -->
+  </div>
+
+  <div id="totalPrice">
+    <h3>Total Price: Rs.550.00</h3>
+  </div>
+<br>
+ 
+
+  <div class="paymentContainer">
+<br><br>
+   <center> <img src="https://media.istockphoto.com/id/173563308/photo/bar-code.jpg?s=612x612&w=0&k=20&c=Kl5Xip4gTcWm8qJOkl2mnJ8igUBERNziuemR6MOXYds=" alt="Barcode" style="width: 300px; height: auto;"></center></div>
+<br>
+  <div class="paymentContainer">
+    <div class="paymentTags">
+      <div class="paymentTag">
+<span class="icon">
+        <img src="https://media.istockphoto.com/id/474001966/photo/female-portrait-icon-as-avatar-or-profile-picture.jpg?s=2048x2048&w=is&k=20&c=WWcw7AvmOc4GBgk-w1ovg_eOVmIWx8DgtDzTCFyhi_U=" alt="Icon">
+      </span>
+        <h3>Student Name:</h3>
+        <p>Jonisha</p>
+        <h3>Student ID:</h3>
+        <p>123456</p>
+        <h3>Amount:</h3>
+        <p>Rs.50.00</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="paymentContainer">
+    <div class="paymentTags">
+      <div class="paymentTag">
+<span class="icon">
+        <img src="https://media.istockphoto.com/id/476085198/photo/businessman-silhouette-as-avatar-or-default-profile-picture.jpg?s=2048x2048&w=is&k=20&c=VoujUFmrZr64WwE6MZQAt0Sa0KqlqKXdl35SewxD1WU=">
+      </span>
+        <h3>Student Name:</h3>
+        <p>Ravi</p>
+        <h3>Student ID:</h3>
+        <p>454577</p>
+        <h3>Amount:</h3>
+        <p>Rs.250.00</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="paymentContainer">
+    <div class="paymentTags">
+      <div class="paymentTag">
+<span class="icon">
+        <img src="https://media.istockphoto.com/id/476085198/photo/businessman-silhouette-as-avatar-or-default-profile-picture.jpg?s=2048x2048&w=is&k=20&c=VoujUFmrZr64WwE6MZQAt0Sa0KqlqKXdl35SewxD1WU=">
+      </span>
+        <h3>Student Name:</h3>
+        <p>Sunil</p>
+        <h3>Student ID:</h3>
+        <p>786548</p>
+        <h3>Amount:</h3>
+        <p>Rs.250.00</p>
+      </div>
+    </div>
+  </div>
+
+<br><br>
+<button id="checkoutBtn" onclick="navigateToFinal()">....NEXT....</button><br><br>
+<a href="lib.html">Back to bookstore </a><br><br>
+
+<script>
+  function navigateToFinal() {
+    window.location.href = "final.html";
+  }
+</script>
+      
+      
+
+ 
+
+
+ 
+</body>
+</html>
